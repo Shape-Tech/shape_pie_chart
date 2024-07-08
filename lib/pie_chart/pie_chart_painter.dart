@@ -22,6 +22,10 @@ class PieChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
+    final borderPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..color = Colors.white
+      ..strokeWidth = 2.0;
     final double total = segments.map((e) => e.value).reduce((a, b) => a + b);
     double startAngle = -math.pi / 2;
 
@@ -36,6 +40,7 @@ class PieChartPainter extends CustomPainter {
         ..close();
 
       canvas.drawPath(path, paint);
+      canvas.drawPath(path, borderPaint);
       startAngle += sweepAngle;
     }
   }

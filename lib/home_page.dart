@@ -10,12 +10,12 @@ class HomePage extends StatelessWidget {
     return Material(
       child: Padding(
         padding: const EdgeInsets.all(50.0),
-        child: SizedBox(
-            width: 700,
-            height: 300,
-            child: PieChartWidget(
-              data: createPieChartData(),
-            )),
+        child: SingleChildScrollView(
+          child: PieChartWidget(
+            data: createPieChartData(),
+            showLegend: false,
+          ),
+        ),
       ),
     );
   }

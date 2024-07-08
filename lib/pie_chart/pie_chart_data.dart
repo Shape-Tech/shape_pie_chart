@@ -16,6 +16,14 @@ class PieChartData extends Equatable {
         segments,
         title,
       ];
+
+  double totalValue() {
+    double _total = 0;
+    for (var elem in segments) {
+      _total += elem.value;
+    }
+    return _total;
+  }
 }
 
 class PieChartSegment extends Equatable {
@@ -37,27 +45,34 @@ class PieChartSegment extends Equatable {
       ];
 
   Widget buildSegmentLegend() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 20,
-          height: 20,
-          color: color,
-        ),
-        Gap(10),
-        Text(segment),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 20,
+            height: 20,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: color,
+            ),
+          ),
+          Gap(10),
+          Text(segment),
+        ],
+      ),
     );
   }
 
-  Widget buildSelectedDisplay() {
+  Widget buildSelectedDisplay(double total) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text("Hovered Segment: ${segment} : ${value}"),
+        child:
+            Text("${segment} : ${((value / total) * 100).toStringAsFixed(0)}%"),
       ),
     );
   }

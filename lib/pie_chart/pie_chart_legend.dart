@@ -8,13 +8,16 @@ class PieChartLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: segments.map((segment) {
-        return segment.buildSegmentLegend();
-      }).toList(),
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: segments.map((segment) {
+          return segment.buildSegmentLegend();
+        }).toList(),
+      ),
     );
   }
 }

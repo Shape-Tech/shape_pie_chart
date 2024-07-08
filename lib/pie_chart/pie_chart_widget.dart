@@ -7,8 +7,12 @@ import 'dart:math' as math;
 
 class PieChartWidget extends StatefulWidget {
   final PieChartData data;
+  final bool? showLegend;
 
-  PieChartWidget({required this.data});
+  PieChartWidget({
+    required this.data,
+    this.showLegend,
+  });
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
@@ -29,8 +33,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       builder: (BuildContext context, BoxConstraints constraints) {
         double size = constraints.maxWidth >= 300 ? 300 : constraints.maxWidth;
         List<Widget> children = [
-          PieChartLegend(segments: widget.data.segments),
-          Gap(20),
+          if (widget.showLegend == true) ...[
+            PieChartLegend(segments: widget.data.segments),
+            Gap(20),
+          ],
           GestureDetector(
             onPanUpdate: (details) {
               final RenderBox box = context.findRenderObject() as RenderBox;
@@ -58,7 +64,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           ),
           if (hoveredSegment != null) ...[
             Gap(20),
-            hoveredSegment!.buildSelectedDisplay(),
+            hoveredSegment!.buildSelectedDisplay(widget.data.totalValue()),
           ],
         ];
         if (constraints.maxWidth >= 700) {
