@@ -29,19 +29,30 @@ class PieChartPainter extends CustomPainter {
     final double total = segments.map((e) => e.value).reduce((a, b) => a + b);
     double startAngle = -math.pi / 2;
 
-    for (var segment in segments) {
-      final sweepAngle = (segment.value / total) * 2 * math.pi;
-      paint.color =
-          segment.color.withOpacity(segment == hoveredSegment ? 1.0 : 0.7);
-      final path = Path()
-        ..moveTo(center.dx, center.dy)
-        ..arcTo(Rect.fromCircle(center: center, radius: radius), startAngle,
-            sweepAngle, false)
-        ..close();
+    bool onlyOneNonZeroSegment =
+        segments.where((segment) => segment.value > 0).length == 1;
 
-      canvas.drawPath(path, paint);
-      canvas.drawPath(path, borderPaint);
-      startAngle += sweepAngle;
+    for (var segment in segments) {
+      if (segments.length == 1 ||
+          (onlyOneNonZeroSegment == true && segment.value > 0)) {
+        // Special case for a single segment
+        paint.color = segment.color.withOpacity(1.0);
+        canvas.drawCircle(center, radius, paint);
+        canvas.drawCircle(center, radius, borderPaint);
+      } else {
+        final sweepAngle = (segment.value / total) * 2 * math.pi;
+        paint.color =
+            segment.color.withOpacity(segment == hoveredSegment ? 1.0 : 0.7);
+        final path = Path()
+          ..moveTo(center.dx, center.dy)
+          ..arcTo(Rect.fromCircle(center: center, radius: radius), startAngle,
+              sweepAngle, false)
+          ..close();
+
+        canvas.drawPath(path, paint);
+        canvas.drawPath(path, borderPaint);
+        startAngle += sweepAngle;
+      }
     }
   }
 

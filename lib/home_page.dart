@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: PieChartWidget(
             data: createPieChartData(),
-            showLegend: false,
+            showLegend: true,
           ),
         ),
       ),
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
     return PieChartData(
       segments: [
         PieChartSegment(segment: 'Value 1', value: 10, color: Colors.red),
-        PieChartSegment(segment: 'Value 2', value: 35, color: Colors.blue),
+        PieChartSegment(segment: 'Value 2', value: 0, color: Colors.blue),
         PieChartSegment(segment: 'Value 3', value: 50, color: Colors.yellow),
         PieChartSegment(segment: 'Value 4', value: 5, color: Colors.green),
       ],
