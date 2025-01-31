@@ -50,7 +50,7 @@ class PieChartSegment extends Equatable {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             width: 20,
@@ -61,7 +61,7 @@ class PieChartSegment extends Equatable {
             ),
           ),
           Gap(10),
-          Flexible(
+          Expanded(
             child: Text(
               segment,
               maxLines: 3,
