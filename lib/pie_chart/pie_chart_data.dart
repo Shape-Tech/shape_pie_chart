@@ -61,7 +61,12 @@ class PieChartSegment extends Equatable {
             ),
           ),
           Gap(10),
-          Text(segment),
+          Flexible(
+            child: Text(
+              segment,
+              maxLines: 3,
+            ),
+          ),
         ],
       ),
     );

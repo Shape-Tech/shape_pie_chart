@@ -23,10 +23,16 @@ class HomePage extends StatelessWidget {
   PieChartData createPieChartData() {
     return PieChartData(
       segments: [
-        PieChartSegment(segment: 'Value 1', value: 10, color: Colors.red),
+        PieChartSegment(
+            segment: 'Value 1 really long title that is super long',
+            value: 10,
+            color: Colors.red),
         PieChartSegment(segment: 'Value 2', value: 0, color: Colors.blue),
         PieChartSegment(segment: 'Value 3', value: 50, color: Colors.yellow),
-        PieChartSegment(segment: 'Value 4', value: 5, color: Colors.green),
+        PieChartSegment(segment: 'Value 5', value: 5, color: Colors.green),
+        PieChartSegment(segment: 'Value 6', value: 50, color: Colors.orange),
+        PieChartSegment(
+            segment: 'Value 4', value: 5, color: Colors.purpleAccent),
       ],
       title: "Testing",
     );

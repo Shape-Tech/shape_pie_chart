@@ -8,15 +8,35 @@ class PieChartLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final halfLength = (segments.length / 2).ceil();
+    final firstColumn = segments.sublist(0, halfLength);
+    final secondColumn = segments.sublist(halfLength);
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: segments.map((segment) {
-          return segment.buildSegmentLegend();
-        }).toList(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: firstColumn.map((segment) {
+                return segment.buildSegmentLegend();
+              }).toList(),
+            ),
+          ),
+          SizedBox(width: 8), // Add some spacing between columns
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: secondColumn.map((segment) {
+                return segment.buildSegmentLegend();
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
