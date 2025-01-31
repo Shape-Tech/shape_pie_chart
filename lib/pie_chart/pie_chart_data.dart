@@ -76,8 +76,10 @@ class PieChartSegment extends Equatable {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child:
-            Text("${segment} : ${((value / total) * 100).toStringAsFixed(0)}%"),
+        child: Text(
+          "${segment} : ${((value / total) * 100).toStringAsFixed(0)}%",
+          maxLines: 3,
+        ),
       ),
     );
   }

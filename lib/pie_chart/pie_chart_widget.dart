@@ -34,7 +34,12 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         double size = constraints.maxWidth >= 300 ? 300 : constraints.maxWidth;
         List<Widget> children = [
           if (widget.showLegend == true) ...[
-            PieChartLegend(segments: widget.data.segments),
+            if (constraints.maxWidth >= 700)
+              SizedBox(
+                  width: constraints.maxWidth / 3,
+                  child: PieChartLegend(segments: widget.data.segments)),
+            if (constraints.maxWidth < 700)
+              PieChartLegend(segments: widget.data.segments),
             Gap(20),
           ],
           GestureDetector(
@@ -64,7 +69,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           ),
           if (hoveredSegment != null) ...[
             Gap(20),
-            hoveredSegment!.buildSelectedDisplay(widget.data.totalValue()),
+            Flexible(
+                child: hoveredSegment!
+                    .buildSelectedDisplay(widget.data.totalValue())),
           ],
         ];
         if (constraints.maxWidth >= 700) {
